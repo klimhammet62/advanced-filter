@@ -1,18 +1,9 @@
 import type { NextPage } from 'next';
 
-import { DarkModeToggleButton } from '@/components/DarkModeToggleButton';
+import { Home } from '@/components/screens/home/Home';
 
-const Home: NextPage = () => {
-	return (
-		<>
-			<div className="w-screen h-screen flex flex-row justify-center items-center dark:bg-slate-800 transition-color duration-700">
-				<p className="text-4xl font-semibold text-blue-400 hover:text-gray-300 cursor-pointer dark:text-white">
-					Hello World!
-				</p>
-				<DarkModeToggleButton />
-			</div>
-		</>
-	);
+const HomePage: NextPage = () => {
+	return <Home />;
 };
 
-export default Home;
+export default HomePage;
