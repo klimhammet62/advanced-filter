@@ -9,7 +9,7 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./app/components/**/*.{js,ts,jsx,tsx}",
   ],
-  theme: {
+  /* theme: {
     colors: {
       primary,
       black: colors.black,
@@ -36,10 +36,10 @@ module.exports = {
           '#1f2937',
         900:
           '#111827'
-      }
+      },
     },
     extend: {},
-  },
+  }, */
   plugins: [
     plugin(({ addComponents, theme, addUtilities }) => {
       addComponents({
