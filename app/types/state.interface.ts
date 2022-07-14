@@ -1,3 +1,6 @@
+export interface IStore {
+
+}
 export interface IProduct {
 	id: number;
 	transaction_name: string;

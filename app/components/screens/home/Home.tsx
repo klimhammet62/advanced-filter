@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 
 import { DarkModeToggleButton } from '@/components/DarkModeToggleButton';
+import Counter from '@/components/counter';
 import { Button } from '@/components/ui/button';
 import { SearchInput } from '@/components/ui/searchInput';
 import { MultiSelect } from '@/components/ui/select';
@@ -21,6 +22,7 @@ export const Home: NextPage<IHome> = () => {
 				<label className="form-label inline-block mb-2 text-gray-700 dark:text-white transition-color duration-700">
 					Filter Data
 				</label>
+				<Counter />
 				<div className="flex flex-row items-center">
 					<div className="flex flex-row items-center m-12">
 						<SearchInput />
