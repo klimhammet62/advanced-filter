@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
@@ -18,19 +19,23 @@ function Counter() {
 	const incrementValue = Number(incrementAmount) || 0;
 
 	return (
-		<div className="flex flex-col justify-center items-center transition-color duration-700">
-			<div className="form-label flex-row justify-center mb-2 text-gray-700 dark:text-white transition-color duration-700">
+		<div
+			className="w-full h-screen flex flex-col justify-center items-center transition-color 
+		duration-700 dark:bg-slate-800 dark:text-white font-semibold"
+		>
+			<div className="form-label flex flex-row justify-center mb-2 text-gray-700 transition-color duration-700">
 				<button
-					className="	"
+					className="dark:text-white"
 					aria-label="Decrement value"
 					onClick={() => dispatch(decrement())}
 				>
 					-
 				</button>
-				<span>{count}</span>
+				<span className="dark:text-white">{count}</span>
 				<button
 					aria-label="Increment value"
 					onClick={() => dispatch(increment())}
+					className="dark:text-white"
 				>
 					+
 				</button>
@@ -44,24 +49,33 @@ function Counter() {
 					border border-solid border-gray-300 rounded-md focus:border-blue-600 focus:outline-none"
 				/>
 				<button
-					className="dark:text-white transition-color duration-700"
+					className="m-2 dark: bg-slate-500 p-2 rounded-md"
 					onClick={() => dispatch(incrementByAmount(incrementValue))}
 				>
 					Add Amount
 				</button>
 				<button
-					className="dark:text-white transition-color duration-700"
+					className="m-2 dark: bg-slate-500 p-2 rounded-md"
 					onClick={() => dispatch(incrementAsync(incrementValue))}
 				>
 					Add Async
 				</button>
 				<button
-					className="dark:text-white transition-color duration-700"
+					className="m-2 dark: bg-slate-500 p-2 rounded-md"
 					onClick={() => dispatch(incrementIfOdd(incrementValue))}
 				>
 					Add If Odd
 				</button>
 			</div>
+			<Link href="/">
+				<h2
+					className="cursor-pointer hover:text-gray-300 dark:text-white dark:hover:text-orange-300
+					p-3 bg-slate-500 rounded-md m-2 hover:bg-sky-700
+					"
+				>
+					Redirect to Home
+				</h2>
+			</Link>
 		</div>
 	);
 }

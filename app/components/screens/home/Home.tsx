@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import Link from 'next/link';
 
 import Counter from '@/components/Counter';
 import { DarkModeToggleButton } from '@/components/DarkModeToggleButton';
@@ -23,18 +24,24 @@ export const Home: NextPage<IHome> = () => {
 					</p>
 					<DarkModeToggleButton />
 				</header>
-
-				<label className="form-label inline-block mb-2 text-gray-700 dark:text-white transition-color duration-700">
-					Filter Data
-				</label>
-				<Counter />
-				<div className="flex flex-row items-center">
-					<div className="flex flex-row items-center m-12">
-						<SearchInput />
-						<Button />
-					</div>
-					<MultiSelect />
-				</div>
+				<Link href="/filter">
+					<h2
+						className="cursor-pointer hover:text-gray-300 dark:text-white dark:hover:text-orange-300
+					p-3 bg-slate-500 rounded-md m-2 hover:bg-sky-700
+					"
+					>
+						Filtration Page
+					</h2>
+				</Link>
+				<Link href="/counter">
+					<h2
+						className="cursor-pointer hover:text-gray-300 dark:text-white dark:hover:text-orange-300
+					p-3 bg-slate-500 rounded-md m-2 hover:bg-sky-700
+					"
+					>
+						Counter
+					</h2>
+				</Link>
 			</div>
 		</Meta>
 	);
