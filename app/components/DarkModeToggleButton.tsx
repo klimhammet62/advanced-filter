@@ -10,7 +10,11 @@ export const DarkModeToggleButton = () => {
 			onClick={toggleDarkMode}
 		>
 			<span>
-				{!darkMode ? <MoonIcon className="h-6" /> : <SunIcon className="h-6" />}
+				{!darkMode ? (
+					<MoonIcon className="h-6 hover:text-gray-300" />
+				) : (
+					<SunIcon className="h-6 dark:hover:text-orange-300" />
+				)}
 			</span>
 		</button>
 	);

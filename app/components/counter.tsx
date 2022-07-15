@@ -18,9 +18,10 @@ function Counter() {
 	const incrementValue = Number(incrementAmount) || 0;
 
 	return (
-		<div>
-			<div>
+		<div className="flex flex-col justify-center items-center transition-color duration-700">
+			<div className="form-label flex-row justify-center mb-2 text-gray-700 dark:text-white transition-color duration-700">
 				<button
+					className="	"
 					aria-label="Decrement value"
 					onClick={() => dispatch(decrement())}
 				>
@@ -39,14 +40,25 @@ function Counter() {
 					aria-label="Set increment amount"
 					value={incrementAmount}
 					onChange={(e) => setIncrementAmount(e.target.value)}
+					className="dark:text-gray-600 p-1.5 
+					border border-solid border-gray-300 rounded-md focus:border-blue-600 focus:outline-none"
 				/>
-				<button onClick={() => dispatch(incrementByAmount(incrementValue))}>
+				<button
+					className="dark:text-white transition-color duration-700"
+					onClick={() => dispatch(incrementByAmount(incrementValue))}
+				>
 					Add Amount
 				</button>
-				<button onClick={() => dispatch(incrementAsync(incrementValue))}>
+				<button
+					className="dark:text-white transition-color duration-700"
+					onClick={() => dispatch(incrementAsync(incrementValue))}
+				>
 					Add Async
 				</button>
-				<button onClick={() => dispatch(incrementIfOdd(incrementValue))}>
+				<button
+					className="dark:text-white transition-color duration-700"
+					onClick={() => dispatch(incrementIfOdd(incrementValue))}
+				>
 					Add If Odd
 				</button>
 			</div>
