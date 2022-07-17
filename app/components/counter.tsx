@@ -9,7 +9,9 @@ import {
 	incrementByAmount,
 	incrementIfOdd,
 	selectCount,
-} from '../redux/reducers/counterSlice';
+} from '../redux/reducers/counter/counterSlice';
+
+import Heading from './ui/Heading';
 
 function Counter() {
 	const dispatch = useAppDispatch();
@@ -23,19 +25,22 @@ function Counter() {
 			className="w-full h-screen flex flex-col justify-center items-center transition-color 
 		duration-700 dark:bg-slate-800 dark:text-white font-semibold"
 		>
+			<Heading title="Counter" />
 			<div className="form-label flex flex-row justify-center mb-2 text-gray-700 transition-color duration-700">
 				<button
-					className="dark:text-white"
+					className="dark:text-white dark:bg-slate-500 flex flex-row justify-center items-center p-3"
 					aria-label="Decrement value"
 					onClick={() => dispatch(decrement())}
 				>
 					-
 				</button>
-				<span className="dark:text-white">{count}</span>
+				<span className="dark:text-white flex flex-row justify-center items-center p-3">
+					{count}
+				</span>
 				<button
 					aria-label="Increment value"
 					onClick={() => dispatch(increment())}
-					className="dark:text-white"
+					className="dark:text-white dark:bg-slate-500 flex flex-row justify-center items-center p-3"
 				>
 					+
 				</button>

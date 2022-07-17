@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { SearchInput } from '@/components/ui/searchInput';
 import { MultiSelect } from '@/components/ui/select';
+import Heading from '@/components/ui/Heading';
 
 export const Filtration = () => {
 	return (
@@ -10,6 +11,7 @@ export const Filtration = () => {
 			className="w-full h-screen flex flex-col justify-center items-center dark:bg-slate-800  
         text-black text-opacity-80 font-semibold dark:text-white"
 		>
+			<Heading title="Filtration" />
 			<label className="form-label inline-block mb-2 text-gray-700 dark:text-white">
 				Filter Data
 			</label>
