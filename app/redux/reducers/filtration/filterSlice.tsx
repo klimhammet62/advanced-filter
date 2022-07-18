@@ -1,30 +1,29 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IFilteredData } from 'types/filterData.interface';
+import { IFilteredData, TInitialState } from 'types/filterData.interface';
 
 import type { AppState } from '../../store';
 
 /* проконсультироваться со смифейсом (как лучше поступить, 
 доставать из объекта вэлью и фильтровать или же поодиночку) */
 
-export interface ProductState {
-	transaction_name: string;
-	amount: string;
-	category: string;
-	transaction_vendor: string;
+class Filter {
+	constructor(public title: string, public value: string) {
+		this.title = title;
+		this.value = value;
+	}
 }
 
-const initialState: ProductState = {
-	transaction_name: '',
-	amount: '',
-	category: '',
-	transaction_vendor: '',
-};
+const initialState: TInitialState = [
+	{ amount: 'asc' },
+	{ category: '' },
+	{ value: '' },
+];
 
 export const filterSlice = createSlice({
 	name: 'filter',
 	initialState,
 	reducers: {
-		filterName: (state: string, action: PayloadAction<string>) => {
+		filterName: (state: any, action: PayloadAction<string>) => {
 			state.transaction_name.filter((item: string) =>
 				item
 					.toLowerCase()
@@ -32,20 +31,22 @@ export const filterSlice = createSlice({
 					.includes(action.payload.toLowerCase())
 			);
 		},
-		filterAmount: (state: string, action: PayloadAction<string>) => {
+		filterAmount: (state: any, action: PayloadAction<string>) => {
 			if (action.payload === 'asc') {
 				return state.amount.sort(
 					(a: string, b: string) => Number(a) - Number(b)
 				);
-			} else {
-				return state.amount.sort(({ a, b }: any) => b - a);
+			} else if (action.payload === 'desc') {
+				return state.amount.sort(
+					(a: string, b: string) => Number(b) - Number(a)
+				);
 			}
 		},
-		changeCategory: (state: string, action: PayloadAction<string>) => {
+		changeCategory: (state: any, action: PayloadAction<string>) => {
 			state.category = action.payload;
 		},
-		filterVendor: (state: string, action: PayloadAction<string>) => {
-			state.transaction_vendor.filter((item: string) =>
+		filterVendor: (state: any, action: PayloadAction<string>) => {
+			state.filtered.transaction_vendor.filter((item: string) =>
 				item.toLowerCase().includes(action.payload.toLowerCase())
 			);
 		},
@@ -55,6 +56,6 @@ export const filterSlice = createSlice({
 export const { filterName, filterAmount, changeCategory, filterVendor } =
 	filterSlice.actions;
 
-export const selectCount = (state: AppState) => state.counter.value;
+export const selectFilter = (state: AppState) => state.filter;
 
 export default filterSlice.reducer;

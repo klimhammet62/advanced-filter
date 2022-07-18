@@ -1,30 +1,36 @@
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import { Fragment, useState } from 'react';
+import {
+	filterAmount,
+	selectFilter,
+} from 'redux/reducers/filtration/filterSlice';
 
-const people = [
-	{ name: 'Wade Cooper' },
-	{ name: 'Arlene Mccoy' },
-	{ name: 'Devon Webb' },
-	{ name: 'Tom Cook' },
-	{ name: 'Tanya Fox' },
-	{ name: 'Hellen Schmidt' },
-];
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 
-export const MultiSelect = () => {
-	const [selected, setSelected] = useState(people[0]);
+export const MultiSelect = ({
+	array,
+	defaultValue,
+}: {
+	array: string[];
+	defaultValue?: string[];
+}) => {
+	const dispatch = useAppDispatch();
+	const filter = useAppSelector(selectFilter);
+	
+	//change value in category and edit layouts logic
 
 	return (
 		<>
-			<Listbox value={selected} onChange={setSelected}>
+			<Listbox value={array} onChange={() => dispatch(filterAmount('desc'))}>
 				<div className="relative">
 					<Listbox.Button
-						className="cursor-pointer relative w-full rounded-lg bg-white py-2 pl-5 pr-16 text-left shadow-md focus:outline-none 
+						className="cursor-pointer relative rounded-lg bg-white pr-2 py-2 text-center shadow-md focus:outline-none 
 					focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 
-					focus-visible:ring-offset-orange-300 sm:text-sm"
+					focus-visible:ring-offset-orange-300 sm:text-sm  w-[120px]"
 					>
 						<span className="block truncate dark:text-black">
-							{selected.name}
+							{defaultValue}
 						</span>
 						<span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
 							<SelectorIcon
@@ -40,18 +46,18 @@ export const MultiSelect = () => {
 						leaveTo="opacity-0"
 					>
 						<Listbox.Options
-							className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white 
+							className="w-[120px] absolute mt-1 max-h-60 overflow-auto rounded-md bg-white 
 						py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm text-black"
 						>
-							{people.map((person, personIdx) => (
+							{array.map((str: string, i: number) => (
 								<Listbox.Option
-									key={personIdx}
+									key={i}
 									className={({ active }) =>
-										`relative select-none py-2 pl-10 pr-4 cursor-pointer ${
+										`relative select-none py-2 pl-3 pr-1 cursor-pointer ${
 											active ? 'bg-amber-100 text-amber-900' : 'text-gray-900'
 										}`
 									}
-									value={person}
+									value={str}
 								>
 									{({ selected }) => (
 										<>
@@ -60,7 +66,7 @@ export const MultiSelect = () => {
 													selected ? 'font-medium' : 'font-normal'
 												}`}
 											>
-												{person.name}
+												{str}
 											</span>
 											{selected ? (
 												<span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">

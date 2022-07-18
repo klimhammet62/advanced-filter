@@ -5,7 +5,7 @@ import Counter from '@/components/Counter';
 import { DarkModeToggleButton } from '@/components/DarkModeToggleButton';
 import { Button } from '@/components/ui/button';
 import { SearchInput } from '@/components/ui/searchInput';
-import { MultiSelect } from '@/components/ui/select';
+import { MultiSelect } from '@/components/ui/CategorySelect';
 
 import { Meta } from '@/utils/meta/Meta';
 
