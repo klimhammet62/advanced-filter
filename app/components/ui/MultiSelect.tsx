@@ -1,37 +1,42 @@
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
-import { Fragment, useState } from 'react';
-import {
-	filterAmount,
-	selectFilter,
-} from 'redux/reducers/filtration/filterSlice';
+import { ChangeEvent, Fragment, useState } from 'react';
+import { changeCategory, filterAmount, selectFilter } from 'redux/reducers/filtration/filterSlice';
+
+
 
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
+
 
 export const MultiSelect = ({
 	array,
 	defaultValue,
 }: {
 	array: string[];
-	defaultValue?: string[];
+	defaultValue: string[];
 }) => {
 	const dispatch = useAppDispatch();
 	const filter = useAppSelector(selectFilter);
-	
+
 	//change value in category and edit layouts logic
+	
 
 	return (
 		<>
-			<Listbox value={array} onChange={() => dispatch(filterAmount('desc'))}>
+			<Listbox
+				value={array}
+				onChange={(event: any): void => {
+					console.log(event);
+					dispatch(filterAmount(event));
+				}}
+			>
 				<div className="relative">
 					<Listbox.Button
 						className="cursor-pointer relative rounded-lg bg-white pr-2 py-2 text-center shadow-md focus:outline-none 
 					focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 
 					focus-visible:ring-offset-orange-300 sm:text-sm  w-[120px]"
 					>
-						<span className="block truncate dark:text-black">
-							{defaultValue}
-						</span>
+						<span className="block truncate dark:text-black">{array[0]}</span>
 						<span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
 							<SelectorIcon
 								className="h-5 w-5 text-gray-400"
@@ -46,7 +51,7 @@ export const MultiSelect = ({
 						leaveTo="opacity-0"
 					>
 						<Listbox.Options
-							className="w-[120px] absolute mt-1 max-h-60 overflow-auto rounded-md bg-white 
+							className="w-[120px] text-center absolute mt-1 max-h-60 overflow-auto rounded-md bg-white 
 						py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm text-black"
 						>
 							{array.map((str: string, i: number) => (

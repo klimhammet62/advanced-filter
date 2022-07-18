@@ -1,19 +1,11 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { IFilteredData, TInitialState } from 'types/filterData.interface';
 
+import data from '../../../data/mock.json';
 import type { AppState } from '../../store';
 
-/* проконсультироваться со смифейсом (как лучше поступить, 
-доставать из объекта вэлью и фильтровать или же поодиночку) */
-
-class Filter {
-	constructor(public title: string, public value: string) {
-		this.title = title;
-		this.value = value;
-	}
-}
-
 const initialState: TInitialState = [
+	{ products: data },
 	{ amount: 'asc' },
 	{ category: '' },
 	{ value: '' },
@@ -24,7 +16,7 @@ export const filterSlice = createSlice({
 	initialState,
 	reducers: {
 		filterName: (state: any, action: PayloadAction<string>) => {
-			state.transaction_name.filter((item: string) =>
+			return state[0].transaction_name.filter((item: string) =>
 				item
 					.toLowerCase()
 					.replace('-', '')
@@ -33,10 +25,14 @@ export const filterSlice = createSlice({
 		},
 		filterAmount: (state: any, action: PayloadAction<string>) => {
 			if (action.payload === 'asc') {
+				state.amount === action.payload;
+
 				return state.amount.sort(
 					(a: string, b: string) => Number(a) - Number(b)
 				);
 			} else if (action.payload === 'desc') {
+				state.amount === action.payload;
+
 				return state.amount.sort(
 					(a: string, b: string) => Number(b) - Number(a)
 				);
@@ -44,9 +40,16 @@ export const filterSlice = createSlice({
 		},
 		changeCategory: (state: any, action: PayloadAction<string>) => {
 			state.category = action.payload;
+
+			return state.category.filter((item: string) =>
+				item
+					.toLowerCase()
+					.replace('-', '')
+					.includes(action.payload.toLowerCase())
+			);
 		},
 		filterVendor: (state: any, action: PayloadAction<string>) => {
-			state.filtered.transaction_vendor.filter((item: string) =>
+			return state.transaction_vendor.filter((item: string) =>
 				item.toLowerCase().includes(action.payload.toLowerCase())
 			);
 		},
