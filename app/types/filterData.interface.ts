@@ -10,4 +10,5 @@ export type TInitialState = {
 	amount: string;
 	category: string;
 	value: string;
+	status?: string;
 };

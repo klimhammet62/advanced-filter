@@ -3,20 +3,27 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { selectFilter } from 'redux/reducers/filtration/filterSlice';
 
+
+
 import Heading from '@/components/ui/Heading';
 import { MultiSelect } from '@/components/ui/MultiSelect';
 import { Button } from '@/components/ui/button';
 import { SearchInput } from '@/components/ui/searchInput';
 
+
+
 import { useAppSelector } from '@/hooks/redux';
 
+
+
 import quickSort from '../../../utils/quicksort/quickSort';
+
 
 export const Filtration = () => {
 	const filter = useAppSelector(selectFilter);
 	const [page, setPage] = useState(1);
 	const data = filter;
-	console.log(data);
+	console.log(data.products);
 
 	return (
 		<div
@@ -30,7 +37,7 @@ export const Filtration = () => {
 					<Button />
 				</div>
 				<MultiSelect
-					array={data.products.map((item) => item.category)}
+
 					defaultValue={'data.amount'}
 				/>
 				<MultiSelect array={['asc', 'desc']} defaultValue={'ads'} />

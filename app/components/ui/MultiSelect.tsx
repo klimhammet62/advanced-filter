@@ -34,7 +34,7 @@ export const MultiSelect = ({
 					focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 
 					focus-visible:ring-offset-orange-300 sm:text-sm  w-[120px]"
 					>
-						<span className="block truncate dark:text-black">{array[0]}</span>
+						<span className="block truncate dark:text-black">{'sad'}</span>
 						<span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
 							<SelectorIcon
 								className="h-5 w-5 text-gray-400"

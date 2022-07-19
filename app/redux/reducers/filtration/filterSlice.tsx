@@ -6,12 +6,14 @@ import quickSort from '@/utils/quicksort/quickSort';
 
 import data from '../../../data/mock.json';
 import type { AppState } from '../../store';
+import store from '../../store';
 
 const initialState: TInitialState = {
 	products: data,
 	amount: 'asc',
 	category: '',
 	value: '',
+	status: 'idle',
 };
 
 export const filterSlice = createSlice({
@@ -28,30 +30,24 @@ export const filterSlice = createSlice({
 		},
 		filterAmount: (state: any, action: PayloadAction<string>) => {
 			if (action.payload === 'asc') {
-				state.category = 'asda';
 				state.amount === action.payload;
 
-				let copyState = JSON.parse(JSON.stringify(state));
+				let copyState = current(state);
 				let copyStateProducts = copyState.products.map(
 					(i: any) => (i = { ...i })
 				);
 
-				console.log(copyStateProducts.map((el: any) => el.amount));
-
 				copyStateProducts.sort((a: any, b: any) => {
 					return parseInt(a.amount.slice(1)) - parseInt(b.amount.slice(1));
 				});
-				console.log(copyStateProducts.map((el: any) => el.amount));
 
 				// console.log(copyStateProducts.sort((a: any, b: any) => {
 				// 	return parseInt(a.amount.slice(1)) - parseInt(b.amount.slice(1));
 				// }).map((el: any) => el.amount));
 
 				copyState = { ...copyState, products: copyStateProducts };
-				console.log(copyState);
 
-				state = copyState;
-				console.log(state);
+				state.products = copyState.products;
 				// state.products = newItems;
 				/* state = state.products.sort((a: any, b: any) => {
 					parseInt(a.amount.slice(1)) - parseInt(b.amount.slice(1));
@@ -80,13 +76,17 @@ export const filterSlice = createSlice({
 			);
 		},
 	},
-	extraReducers: (builder) => {
-		// Дополнительные редьюсеры
-		// При удалении поста нужно удалить все его комментарии
-		builder.addCase(filterAmount, (state, action) => {
-			state.setAll(state, restEntities);
-		});
-	},
+	/* IF I WANT IT DEPLOY ON BACKEND extraReducers: (builder) => {
+		builder
+			.addCase(filterAmount.pending, (state) => {
+				state.status = 'loading';
+			})
+			.addCase(filterAmount.fulfilled, (state, action) => {
+				state.status = 'idle';
+				// state.obj.value += action.payload;
+				state.products += action.payload;
+			});
+	}, */
 });
 
 export const { filterName, filterAmount, changeCategory, filterVendor } =
