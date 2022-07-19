@@ -1,1 +1,1 @@
-##Project with reusable configs(prettier/tailwind/tsconfig/eclint/package), architecture and filter
+##Project with reusable configs(prettier/tailwind/tsconfig/eslint/package), architecture and filter
