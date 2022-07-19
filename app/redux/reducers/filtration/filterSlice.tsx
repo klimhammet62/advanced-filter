@@ -1,15 +1,18 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IFilteredData, TInitialState } from 'types/filterData.interface';
+import { PayloadAction, createSlice, current } from '@reduxjs/toolkit';
+import { slice } from 'lodash';
+import { TInitialState } from 'types/filterData.interface';
+
+import quickSort from '@/utils/quicksort/quickSort';
 
 import data from '../../../data/mock.json';
 import type { AppState } from '../../store';
 
-const initialState: TInitialState = [
-	{ products: data },
-	{ amount: 'asc' },
-	{ category: '' },
-	{ value: '' },
-];
+const initialState: TInitialState = {
+	products: data,
+	amount: 'asc',
+	category: '',
+	value: '',
+};
 
 export const filterSlice = createSlice({
 	name: 'filter',
@@ -25,17 +28,40 @@ export const filterSlice = createSlice({
 		},
 		filterAmount: (state: any, action: PayloadAction<string>) => {
 			if (action.payload === 'asc') {
+				state.category = 'asda';
 				state.amount === action.payload;
 
-				return state.amount.sort(
-					(a: string, b: string) => Number(a) - Number(b)
+				let copyState = JSON.parse(JSON.stringify(state));
+				let copyStateProducts = copyState.products.map(
+					(i: any) => (i = { ...i })
 				);
+
+				console.log(copyStateProducts.map((el: any) => el.amount));
+
+				copyStateProducts.sort((a: any, b: any) => {
+					return parseInt(a.amount.slice(1)) - parseInt(b.amount.slice(1));
+				});
+				console.log(copyStateProducts.map((el: any) => el.amount));
+
+				// console.log(copyStateProducts.sort((a: any, b: any) => {
+				// 	return parseInt(a.amount.slice(1)) - parseInt(b.amount.slice(1));
+				// }).map((el: any) => el.amount));
+
+				copyState = { ...copyState, products: copyStateProducts };
+				console.log(copyState);
+
+				state = copyState;
+				console.log(state);
+				// state.products = newItems;
+				/* state = state.products.sort((a: any, b: any) => {
+					parseInt(a.amount.slice(1)) - parseInt(b.amount.slice(1));
+				}); */
 			} else if (action.payload === 'desc') {
 				state.amount === action.payload;
 
-				return state.amount.sort(
+				/* return state.products.sort(
 					(a: string, b: string) => Number(b) - Number(a)
-				);
+				); */
 			}
 		},
 		changeCategory: (state: any, action: PayloadAction<string>) => {
@@ -53,6 +79,13 @@ export const filterSlice = createSlice({
 				item.toLowerCase().includes(action.payload.toLowerCase())
 			);
 		},
+	},
+	extraReducers: (builder) => {
+		// Дополнительные редьюсеры
+		// При удалении поста нужно удалить все его комментарии
+		builder.addCase(filterAmount, (state, action) => {
+			state.setAll(state, restEntities);
+		});
 	},
 });
 

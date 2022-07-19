@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import {
@@ -9,6 +9,7 @@ import {
 	incrementByAmount,
 	incrementIfOdd,
 	selectCount,
+	swap,
 } from '../redux/reducers/counter/counterSlice';
 
 import Heading from './ui/Heading';
@@ -20,11 +21,18 @@ function Counter() {
 
 	const incrementValue = Number(incrementAmount) || 0;
 
+	useEffect(() => {
+	console.log(count)
+	
+	}, [count])
+	
+
 	return (
 		<div
 			className="w-full h-screen flex flex-col justify-center items-center transition-color 
 		duration-700 dark:bg-slate-800 dark:text-white font-semibold"
 		>
+			<button onClick={()=> dispatch(swap())}>zxc</button>	
 			<Heading title="Counter" />
 			<div className="form-label flex flex-row justify-center mb-2 text-gray-700 transition-color duration-700">
 				<button
@@ -34,9 +42,21 @@ function Counter() {
 				>
 					-
 				</button>
-				<span className="dark:text-white flex flex-row justify-center items-center p-3">
-					{count}
-				</span>
+				
+					{/* {count.value} */}
+				{/* <span className="dark:text-white flex flex-row justify-center items-center p-3">
+					{count[0].value}
+
+				</span> */}
+
+<div>
+	{count.map((item, index) => 
+			<div key={index}>
+				{item.value}
+			</div>
+		)}
+</div>
+
 				<button
 					aria-label="Increment value"
 					onClick={() => dispatch(increment())}

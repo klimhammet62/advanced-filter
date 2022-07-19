@@ -58,7 +58,7 @@
 	{
 		"id": 9,
 		"transaction_name": "Eggplant - Asian",
-		"amount": "$186.53",
+		"amount": "$189.42",
 		"category": "Kids",
 		"transaction_vendor": "Topicstorm"
 	},
@@ -86,7 +86,7 @@
 	{
 		"id": 13,
 		"transaction_name": "Beef - Tenderloin - Aa",
-		"amount": "$973.47",
+		"amount": "$1000.47",
 		"category": "Movies",
 		"transaction_vendor": "Shufflester"
 	},

@@ -5,9 +5,9 @@ export interface IFilteredData {
 	category: string;
 	transaction_vendor: string;
 }
-export type TInitialState = [
-	{ products: IFilteredData[] },
-	{ amount: string },
-	{ category: string },
-	{ value: string }
-];
+export type TInitialState = {
+	products: IFilteredData[];
+	amount: string;
+	category: string;
+	value: string;
+};

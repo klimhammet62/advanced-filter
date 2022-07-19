@@ -29,6 +29,6 @@
       "@/assets/*": ["assets/*"],
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "app/redux/store.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "app/redux/store.js", "app/utils/quicksort/quickSort.js"],
   "exclude": ["node_modules"]
 }

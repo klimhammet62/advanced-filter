@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import Link from 'next/link';
 import { useState } from 'react';
 import { selectFilter } from 'redux/reducers/filtration/filterSlice';
@@ -9,13 +10,13 @@ import { SearchInput } from '@/components/ui/searchInput';
 
 import { useAppSelector } from '@/hooks/redux';
 
-import data from '../../../data/mock.json';
+import quickSort from '../../../utils/quicksort/quickSort';
 
 export const Filtration = () => {
 	const filter = useAppSelector(selectFilter);
 	const [page, setPage] = useState(1);
-	const data = Object.values(filter[0])[0];
-	console.log();
+	const data = filter;
+	console.log(data);
 
 	return (
 		<div
@@ -29,23 +30,24 @@ export const Filtration = () => {
 					<Button />
 				</div>
 				<MultiSelect
-					array={data.map((item) => item.category)}
-					defaultValue={Object.values(filter[1])}
+					array={data.products.map((item) => item.category)}
+					defaultValue={'data.amount'}
 				/>
-				<MultiSelect
-					array={['asc', 'desc']}
-					defaultValue={Object.values(filter[0])}
-				/>
+				<MultiSelect array={['asc', 'desc']} defaultValue={'ads'} />
 			</div>
 			<label className="form-label inline-block mb-2 text-gray-700 dark:text-white">
 				Filterred Data
 			</label>
+			<h1>
+				{'category'}
+				{filter.category}
+			</h1>
 			<div className="grid grid-cols-4 gap-5">
-				{Object.values(filter[0])[0]
-					.filter((item, i: number) => i > (page - 1) * 20 && i <= page * 20)
+				{data.products
+					.filter((item, i) => i >= (page - 1) * 20 && i <= page * 20)
 					.map((item: any) => (
 						<ul
-							key={item.id}
+							key={nanoid()}
 							className="dark:bg-white dark:hover:bg-gray-400 rounded-[15px] bg-white
 						text-black text-center hover:bg-gray-400 dark:hover:text-white cursor-pointer p-2"
 						>
@@ -57,7 +59,7 @@ export const Filtration = () => {
 					))}
 			</div>
 			<div className="flex items-center justify-around">
-				{Array.from('a'.repeat(Object.values(filter[0])[0].length / 20)).map(
+				{Array.from('a'.repeat(data.products.length / 20)).map(
 					(element: any, index: number) => (
 						<button key={index} onClick={() => setPage(index + 1)}>
 							{index + 1}

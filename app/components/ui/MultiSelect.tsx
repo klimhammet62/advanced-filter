@@ -1,32 +1,30 @@
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
+import { nanoid } from 'nanoid';
 import { ChangeEvent, Fragment, useState } from 'react';
-import { changeCategory, filterAmount, selectFilter } from 'redux/reducers/filtration/filterSlice';
-
-
+import {
+	changeCategory,
+	filterAmount,
+	selectFilter,
+} from 'redux/reducers/filtration/filterSlice';
 
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
-
 
 export const MultiSelect = ({
 	array,
 	defaultValue,
 }: {
-	array: string[];
-	defaultValue: string[];
+	array?: string[];
+	defaultValue?: string;
 }) => {
 	const dispatch = useAppDispatch();
 	const filter = useAppSelector(selectFilter);
-
-	//change value in category and edit layouts logic
-	
 
 	return (
 		<>
 			<Listbox
 				value={array}
 				onChange={(event: any): void => {
-					console.log(event);
 					dispatch(filterAmount(event));
 				}}
 			>
@@ -54,9 +52,9 @@ export const MultiSelect = ({
 							className="w-[120px] text-center absolute mt-1 max-h-60 overflow-auto rounded-md bg-white 
 						py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm text-black"
 						>
-							{array.map((str: string, i: number) => (
+							{array?.map((str: string) => (
 								<Listbox.Option
-									key={i}
+									key={nanoid()}
 									className={({ active }) =>
 										`relative select-none py-2 pl-3 pr-1 cursor-pointer ${
 											active ? 'bg-amber-100 text-amber-900' : 'text-gray-900'
