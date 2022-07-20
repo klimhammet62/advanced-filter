@@ -21,10 +21,6 @@ function Counter() {
 
 	const incrementValue = Number(incrementAmount) || 0;
 
-	useEffect(() => {
-	console.log(count)
-	
-	}, [count])
 	
 
 	return (
@@ -50,7 +46,7 @@ function Counter() {
 				</span> */}
 
 <div>
-	{count.map((item, index) => 
+	{count.map((item, index: number) => 
 			<div key={index}>
 				{item.value}
 			</div>

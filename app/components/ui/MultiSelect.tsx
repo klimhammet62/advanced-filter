@@ -1,31 +1,29 @@
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
-import { ChangeEvent, Fragment, useState } from 'react';
-import {
-	changeCategory,
-	filterAmount,
-	selectFilter,
-} from 'redux/reducers/filtration/filterSlice';
+import { ChangeEvent, Fragment } from 'react';
+import { selectFilter } from 'redux/reducers/filtration/filterSlice';
 
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 
 export const MultiSelect = ({
 	array,
 	defaultValue,
+	selectFunction,
 }: {
 	array?: string[];
 	defaultValue?: string;
+	selectFunction: ActionCreatorWithPayload<string, string>;
 }) => {
 	const dispatch = useAppDispatch();
-	const filter = useAppSelector(selectFilter);
 
 	return (
 		<>
 			<Listbox
-				value={array}
+				value={defaultValue}
 				onChange={(event: any): void => {
-					dispatch(filterAmount(event));
+					dispatch(selectFunction(event));
 				}}
 			>
 				<div className="relative">
@@ -34,7 +32,9 @@ export const MultiSelect = ({
 					focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 
 					focus-visible:ring-offset-orange-300 sm:text-sm  w-[120px]"
 					>
-						<span className="block truncate dark:text-black">{'sad'}</span>
+						<span className="block truncate dark:text-black">
+							{defaultValue}
+						</span>
 						<span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
 							<SelectorIcon
 								className="h-5 w-5 text-gray-400"
