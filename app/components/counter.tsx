@@ -13,6 +13,7 @@ import {
 } from '../redux/reducers/counter/counterSlice';
 
 import Heading from './ui/Heading';
+import { Redirect } from './ui/Redirect';
 
 function Counter() {
 	const dispatch = useAppDispatch();
@@ -21,14 +22,12 @@ function Counter() {
 
 	const incrementValue = Number(incrementAmount) || 0;
 
-	
-
 	return (
 		<div
 			className="w-full h-screen flex flex-col justify-center items-center transition-color 
 		duration-700 dark:bg-slate-800 dark:text-white font-semibold"
 		>
-			<button onClick={()=> dispatch(swap())}>zxc</button>	
+			<button onClick={() => dispatch(swap())}>zxc</button>
 			<Heading title="Counter" />
 			<div className="form-label flex flex-row justify-center mb-2 text-gray-700 transition-color duration-700">
 				<button
@@ -38,20 +37,18 @@ function Counter() {
 				>
 					-
 				</button>
-				
-					{/* {count.value} */}
+
+				{/* {count.value} */}
 				{/* <span className="dark:text-white flex flex-row justify-center items-center p-3">
 					{count[0].value}
 
 				</span> */}
 
-<div>
-	{count.map((item, index: number) => 
-			<div key={index}>
-				{item.value}
-			</div>
-		)}
-</div>
+				<div>
+					{count.map((item, index: number) => (
+						<div key={index}>{item.value}</div>
+					))}
+				</div>
 
 				<button
 					aria-label="Increment value"
@@ -88,15 +85,7 @@ function Counter() {
 					Add If Odd
 				</button>
 			</div>
-			<Link href="/">
-				<h2
-					className="cursor-pointer hover:text-gray-300 dark:text-white dark:hover:text-orange-300
-					p-3 bg-slate-500 rounded-md m-2 hover:bg-sky-700
-					"
-				>
-					Redirect to Home
-				</h2>
-			</Link>
+			<Redirect text="Redirect to Home" link=""/>
 		</div>
 	);
 }

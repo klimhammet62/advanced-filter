@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import Link from 'next/link';
 
 import { DarkModeToggleButton } from '@/components/DarkModeToggleButton';
+import { Redirect } from '@/components/ui/Redirect';
 
 import { Meta } from '@/utils/meta/Meta';
 
@@ -20,24 +21,8 @@ export const Home: NextPage<IHome> = () => {
 					</p>
 					<DarkModeToggleButton />
 				</header>
-				<Link href="/filter">
-					<h2
-						className="cursor-pointer hover:text-gray-300 dark:text-white dark:hover:text-orange-300
-					p-3 bg-slate-500 rounded-md m-2 hover:bg-sky-700
-					"
-					>
-						Filtration Page
-					</h2>
-				</Link>
-				<Link href="/counter">
-					<h2
-						className="cursor-pointer hover:text-gray-300 dark:text-white dark:hover:text-orange-300
-					p-3 bg-slate-500 rounded-md m-2 hover:bg-sky-700
-					"
-					>
-						Counter
-					</h2>
-				</Link>
+				<Redirect text="Filtration Page" link="filter" />
+				<Redirect text="Counter" link="counter" />
 			</div>
 		</Meta>
 	);

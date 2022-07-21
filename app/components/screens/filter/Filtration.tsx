@@ -11,6 +11,7 @@ import { ProductCards } from '@/components/ProductCards';
 import { Selectors } from '@/components/Selectors';
 import Heading from '@/components/ui/Heading';
 import { MultiSelect } from '@/components/ui/MultiSelect';
+import { Redirect } from '@/components/ui/Redirect';
 import { Button } from '@/components/ui/button';
 import { SearchInput } from '@/components/ui/searchInput';
 
@@ -40,15 +41,7 @@ export const Filtration = () => {
 				{data.category}
 			</h1>
 			<ProductCards />
-			<Link href="/">
-				<h2
-					className="cursor-pointer hover:text-gray-300 dark:text-white dark:hover:text-orange-300
-					p-3 bg-slate-500 rounded-md m-2 hover:bg-sky-700
-					"
-				>
-					Redirect to Home
-				</h2>
-			</Link>
+			<Redirect text="Redirect to Home" link="" />
 		</div>
 	);
 };
