@@ -11,7 +11,7 @@ export const SearchInput = () => {
 		dispatch(filterName(e?.target?.value));
 
 	const debouncedOnChange = debounce(updateValue, 200);
-    
+
 	return (
 		<div className="flex flex-col justify-center items-center transition-color duration-700">
 			<div className="xl:w-96">

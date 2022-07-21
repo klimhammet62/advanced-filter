@@ -1,5 +1,6 @@
 import {
 	changeCategory,
+	filterLocation,
 	selectFilter,
 	sortAmount,
 } from 'redux/reducers/filtration/filterSlice';
@@ -43,6 +44,12 @@ export const Selectors = () => {
 				defaultValue="Sort products"
 				selectFunction={sortAmount}
 				selectedValue={data.amount}
+			/>
+			<MultiSelect
+				array={['Spain', 'Germany', 'USA', 'Canada']}
+				defaultValue="Select location"
+				selectFunction={filterLocation}
+				selectedValue={data.location}
 			/>
 		</>
 	);

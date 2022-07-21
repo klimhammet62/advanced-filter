@@ -12,21 +12,26 @@ export const ProductCards = () => {
 	return (
 		<>
 			<div className="grid grid-cols-4 gap-5">
-				{data.products
-					.filter((item, i) => i >= (page - 1) * 20 && i < page * 20)
-					.map((item: any) => (
-						<ul
-							key={nanoid()}
-							className=" dark:hover:bg-gray-400 rounded-[15px] bg-white
+				{data.filteredData ? (
+					data.filteredData
+						.filter((item, i) => i >= (page - 1) * 20 && i < page * 20)
+						.map((item: any) => (
+							<ul
+								key={nanoid()}
+								className=" dark:hover:bg-gray-400 rounded-[15px] bg-white
 						text-black text-center hover:bg-gray-400 dark:hover:text-white 
 						cursor-pointer p-2 border-solid border-2 dark:border-none hover:border-amber-800 border-slate-500"
-						>
-							<li>{item.transaction_name}</li>
-							<li>{item.amount}</li>
-							<li>{item.category}</li>
-							<li>{item.transaction_vendor}</li>
-						</ul>
-					))}
+							>
+								<li>{item.transaction_name}</li>
+								<li>{item.amount}</li>
+								<li>{item.category}</li>
+								<li>{item.transaction_vendor}</li>
+								<li>{item.location}</li>
+							</ul>
+						))
+				) : (
+					<div>No items</div>
+				)}
 			</div>
 			<Pagination setPage={setPage} />
 		</>

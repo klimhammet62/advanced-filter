@@ -11,6 +11,8 @@ export type TInitialState = {
 	category: string;
 	value: string;
 	status?: string;
+	filteredData: IFilteredData[] | undefined;
+	location?: string;
 };
 export interface ISort {
 	id: number;

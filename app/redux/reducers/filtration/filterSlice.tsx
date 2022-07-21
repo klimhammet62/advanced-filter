@@ -13,6 +13,8 @@ const initialState: TInitialState = {
 	category: '',
 	value: '',
 	status: 'idle',
+	filteredData: data,
+	location: '',
 };
 
 export const filterSlice = createSlice({
@@ -20,60 +22,89 @@ export const filterSlice = createSlice({
 	initialState,
 	reducers: {
 		filterName: (state: any, action: PayloadAction<string>) => {
-			return state[0].transaction_name.filter((item: string) =>
-				item
-					.toLowerCase()
-					.replace('-', '')
-					.includes(action.payload.toLowerCase())
+			let copyState = current(state);
+			let copyStateProducts = copyState.products.map(
+				(i: any) => (i = { ...i })
 			);
+			state.filteredData = copyStateProducts.filter(
+				({
+					transaction_name,
+					transaction_vendor,
+				}: {
+					transaction_name: string;
+					transaction_vendor: string;
+				}) => {
+					if (
+						transaction_name
+							.toLowerCase()
+							.includes(action.payload.toLowerCase()) === true ||
+						transaction_vendor
+							.toLowerCase()
+							.includes(action.payload.toLowerCase()) === true
+					) {
+						return transaction_name;
+					}
+				}
+			);
+			copyState = { ...copyState, filteredData: state.filteredData };
+			state.filteredData = copyState.filteredData;
 		},
 		sortAmount: (state: any, action: PayloadAction<string>) => {
 			state.amount = action.payload;
 			if (action.payload === 'asc') {
 				let copyState = current(state);
-				let copyStateProducts = copyState.products.map(
+				let copyStateProducts = state.filteredData.map(
 					(i: any) => (i = { ...i })
 				);
 
-				copyStateProducts.sort((a: any, b: any) => {
+				state.filteredData = copyStateProducts.sort((a: any, b: any) => {
 					return parseInt(a.amount.slice(1)) - parseInt(b.amount.slice(1));
 				});
 
-				copyState = { ...copyState, products: copyStateProducts };
-				state.products = copyState.products;
+				copyState = { ...copyState, filteredData: state.filteredData };
+				state.filteredData = copyState.filteredData;
 			} else if (action.payload === 'desc') {
 				let copyState = current(state);
-				let copyStateProducts = copyState.products.map(
+				let copyStateProducts = state.filteredData.map(
 					(i: any) => (i = { ...i })
 				);
-
-				copyStateProducts.sort((a: any, b: any) => {
+				state.filteredData = copyStateProducts.sort((a: any, b: any) => {
 					return parseInt(b.amount.slice(1)) - parseInt(a.amount.slice(1));
 				});
 
-				copyState = { ...copyState, products: copyStateProducts };
+				copyState = { ...copyState, filteredData: state.filteredData };
 
-				state.products = copyState.products;
+				state.filteredData = copyState.filteredData;
 			}
 		},
 		changeCategory: (state: any, action: PayloadAction<string>) => {
 			state.category = action.payload;
 			let copyState = current(state);
-			let copyStateProducts = copyState.products.map(
+			let copyStateProducts = state.filteredData.map(
 				(i: any) => (i = { ...i })
 			);
-			const filteredCategories = copyStateProducts.filter(
+			state.filteredData = copyStateProducts.filter(
 				({ category }: { category: string }) => category === action.payload
 			);
 
-			copyState = { ...copyState, products: filteredCategories };
+			copyState = { ...copyState, filteredData: state.filteredData };
 
-			state.products = copyState.products;
+			state.filteredData = copyState.filteredData;
 		},
-		filterVendor: (state: any, action: PayloadAction<string>) => {
-			return state.transaction_vendor.filter((item: string) =>
-				item.toLowerCase().includes(action.payload.toLowerCase())
+		filterLocation: (state: any, action: PayloadAction<string>) => {
+			state.location = action.payload;
+			let copyState = current(state);
+			let copyStateProducts = state.filteredData.map(
+				(i: any) => (i = { ...i })
 			);
+
+			state.filteredData = state.filteredData.filter(
+				({ category }: { category: string }) => category === action.payload
+			);
+
+			copyState = { ...copyState, filteredData: state.filteredData };
+
+			state.filteredData = copyState.filteredData;
 		},
 	},
 	/* IF I WANT TO DEPLOY ON BACKEND extraReducers: (builder) => {
@@ -89,7 +120,7 @@ export const filterSlice = createSlice({
 	}, */
 });
 
-export const { filterName, sortAmount, changeCategory, filterVendor } =
+export const { filterName, sortAmount, changeCategory, filterLocation } =
 	filterSlice.actions;
 
 export const selectFilter = (state: AppState) => state.filter;
