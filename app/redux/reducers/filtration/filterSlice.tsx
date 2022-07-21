@@ -9,7 +9,7 @@ import store from '../../store';
 
 const initialState: TInitialState = {
 	products: data,
-	amount: 'asc',
+	amount: '',
 	category: '',
 	value: '',
 	status: 'idle',
@@ -27,10 +27,9 @@ export const filterSlice = createSlice({
 					.includes(action.payload.toLowerCase())
 			);
 		},
-		filterAmount: (state: any, action: PayloadAction<string>) => {
+		sortAmount: (state: any, action: PayloadAction<string>) => {
+			state.amount = action.payload;
 			if (action.payload === 'asc') {
-				state.amount === action.payload;
-
 				let copyState = current(state);
 				let copyStateProducts = copyState.products.map(
 					(i: any) => (i = { ...i })
@@ -41,11 +40,8 @@ export const filterSlice = createSlice({
 				});
 
 				copyState = { ...copyState, products: copyStateProducts };
-
 				state.products = copyState.products;
 			} else if (action.payload === 'desc') {
-				state.amount === action.payload;
-
 				let copyState = current(state);
 				let copyStateProducts = copyState.products.map(
 					(i: any) => (i = { ...i })
@@ -82,10 +78,10 @@ export const filterSlice = createSlice({
 	},
 	/* IF I WANT TO DEPLOY ON BACKEND extraReducers: (builder) => {
 		builder
-			.addCase(filterAmount.pending, (state) => {
+			.addCase(sortAmount.pending, (state) => {
 				state.status = 'loading';
 			})
-			.addCase(filterAmount.fulfilled, (state, action) => {
+			.addCase(sortAmount.fulfilled, (state, action) => {
 				state.status = 'idle';
 				// state.obj.value += action.payload;
 				state.products += action.payload;
@@ -93,7 +89,7 @@ export const filterSlice = createSlice({
 	}, */
 });
 
-export const { filterName, filterAmount, changeCategory, filterVendor } =
+export const { filterName, sortAmount, changeCategory, filterVendor } =
 	filterSlice.actions;
 
 export const selectFilter = (state: AppState) => state.filter;

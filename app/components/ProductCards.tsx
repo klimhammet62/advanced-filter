@@ -19,7 +19,7 @@ export const ProductCards = () => {
 							key={nanoid()}
 							className=" dark:hover:bg-gray-400 rounded-[15px] bg-white
 						text-black text-center hover:bg-gray-400 dark:hover:text-white 
-						cursor-pointer p-2 border-solid border-2 dark:border-none border-slate-500"
+						cursor-pointer p-2 border-solid border-2 dark:border-none hover:border-amber-800 border-slate-500"
 						>
 							<li>{item.transaction_name}</li>
 							<li>{item.amount}</li>

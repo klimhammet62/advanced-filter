@@ -1,8 +1,13 @@
 import Link from 'next/link';
 
-import { Filtration } from '@/components/screens/filter/Filtration';
+
+
+import { FiltrationPage } from '@/components/screens/filter/FiltrationPage';
+
+
 
 import { Meta } from '@/utils/meta/Meta';
+
 
 export default function FilterPage() {
 	return (
@@ -10,7 +15,7 @@ export default function FilterPage() {
 			title="Sort your products advanced"
 			description="Sort your products advanced"
 		>
-			<Filtration />
+			<FiltrationPage />
 		</Meta>
 	);
 }

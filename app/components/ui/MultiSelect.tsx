@@ -2,26 +2,27 @@ import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
-import { ChangeEvent, Fragment } from 'react';
-import { selectFilter } from 'redux/reducers/filtration/filterSlice';
+import { Fragment } from 'react';
 
-import { useAppDispatch, useAppSelector } from '@/hooks/redux';
+import { useAppDispatch } from '@/hooks/redux';
 
 export const MultiSelect = ({
 	array,
 	defaultValue,
 	selectFunction,
+	selectedValue,
 }: {
-	array?: string[];
-	defaultValue?: string;
+	array: string[];
+	defaultValue: string;
 	selectFunction: ActionCreatorWithPayload<string, string>;
+	selectedValue: string | null;
 }) => {
 	const dispatch = useAppDispatch();
 
 	return (
 		<>
 			<Listbox
-				value={defaultValue}
+				value={selectedValue === '' ? defaultValue : selectedValue}
 				onChange={(event: any): void => {
 					dispatch(selectFunction(event));
 				}}
@@ -33,7 +34,7 @@ export const MultiSelect = ({
 					focus-visible:ring-offset-orange-300 sm:text-sm  w-[120px]"
 					>
 						<span className="block truncate dark:text-black">
-							{defaultValue}
+							{selectedValue === '' ? defaultValue : selectedValue}
 						</span>
 						<span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
 							<SelectorIcon
@@ -52,7 +53,7 @@ export const MultiSelect = ({
 							className="w-[120px] text-center absolute mt-1 max-h-60 overflow-auto rounded-md bg-white 
 						py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm text-black"
 						>
-							{array?.map((str: string) => (
+							{array.map((str: string) => (
 								<Listbox.Option
 									key={nanoid()}
 									className={({ active }) =>

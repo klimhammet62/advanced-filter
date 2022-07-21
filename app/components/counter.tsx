@@ -25,7 +25,7 @@ function Counter() {
 	return (
 		<div
 			className="w-full h-screen flex flex-col justify-center items-center transition-color 
-		duration-700 dark:bg-slate-800 dark:text-white font-semibold"
+		duration-700 dark:text-white font-semibold"
 		>
 			<button onClick={() => dispatch(swap())}>zxc</button>
 			<Heading title="Counter" />
@@ -85,7 +85,7 @@ function Counter() {
 					Add If Odd
 				</button>
 			</div>
-			<Redirect text="Redirect to Home" link=""/>
+			<Redirect text="Redirect to Home" link="" />
 		</div>
 	);
 }

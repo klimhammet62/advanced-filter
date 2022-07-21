@@ -1,6 +1,3 @@
-import Link from 'next/link';
-import React from 'react';
-
 import Heading from '@/components/ui/Heading';
 import { Redirect } from '@/components/ui/Redirect';
 

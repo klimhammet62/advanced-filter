@@ -1,12 +1,12 @@
-[] - 
+[X] - 
     1.1 multiselect (how to drill functions)
     1.2 default option no filter(choose)
     quicksort vmesto sort
-[] - refactor pagination, select, products array architecture
-[] - do amount filter 
+[X] - refactor pagination, select, products array architecture
+[!!!] - do searchinput for name and vendor 
 [] - category reducer 
-[] - pagination styling 
-[] - do searchinput for name and vendor 
+[] - do amount filter 
+[X] - pagination styling 
 [] - noitems && (into array )
-[] - 19 elements all pages bug
-* - вызывать доступ ко всем страницам при пагинации большого количества страниц(по типу порнхаб и дискорд)
+[X] - 19 elements all pages bug
+[*] - вызывать доступ ко всем страницам при пагинации большого количества страниц(по типу порнхаб и дискорд)
