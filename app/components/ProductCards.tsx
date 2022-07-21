@@ -13,12 +13,13 @@ export const ProductCards = () => {
 		<>
 			<div className="grid grid-cols-4 gap-5">
 				{data.products
-					.filter((item, i) => i >= (page - 1) * 20 && i <= page * 20)
+					.filter((item, i) => i >= (page - 1) * 20 && i < page * 20)
 					.map((item: any) => (
 						<ul
 							key={nanoid()}
-							className="dark:bg-white dark:hover:bg-gray-400 rounded-[15px] bg-white
-						text-black text-center hover:bg-gray-400 dark:hover:text-white cursor-pointer p-2"
+							className=" dark:hover:bg-gray-400 rounded-[15px] bg-white
+						text-black text-center hover:bg-gray-400 dark:hover:text-white 
+						cursor-pointer p-2 border-solid border-2 dark:border-none border-slate-500"
 						>
 							<li>{item.transaction_name}</li>
 							<li>{item.amount}</li>
