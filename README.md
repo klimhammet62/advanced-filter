@@ -1,6 +1,7 @@
 ## Project with reusable configs(prettier/tailwind/tsconfig/eslint/package), architecture and filter
-<br/>
+<br/> 
 ```
-*yarn add + yarn dev*
+# yarn add + yarn dev
 ```
+
  
