@@ -4,6 +4,7 @@ export interface IFilteredData {
 	amount: string;
 	category: string;
 	transaction_vendor: string;
+	location?: string;
 }
 export type TInitialState = {
 	products: IFilteredData[];
@@ -11,7 +12,7 @@ export type TInitialState = {
 	category: string;
 	value: string;
 	status?: string;
-	filteredData: IFilteredData[] | undefined;
+	filteredData: IFilteredData[];
 	location?: string;
 };
 export interface ISort {

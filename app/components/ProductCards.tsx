@@ -6,19 +6,20 @@ import { selectFilter } from 'redux/reducers/filtration/filterSlice';
 import { useAppSelector } from '@/hooks/redux';
 
 import { Pagination } from './Pagination';
+import { IFilteredData } from 'types/filterData.interface';
 
 export const ProductCards = () => {
 	const data = useAppSelector(selectFilter);
 	const deferredProducts = useDeferredValue(data.filteredData);
 	const [page, setPage] = useState<number>(1);
-	
+
 	return (
 		<>
 			<div className="grid grid-cols-4 gap-5">
 				{deferredProducts ? (
 					deferredProducts
 						.filter((item, i) => i >= (page - 1) * 20 && i < page * 20)
-						.map((item: any) => (
+						.map((item: IFilteredData) => (
 							<ul
 								key={nanoid()}
 								className=" dark:hover:bg-gray-400 rounded-[15px] bg-white

@@ -23,7 +23,7 @@ export const MultiSelect = ({
 		<>
 			<Listbox
 				value={selectedValue === '' ? defaultValue : selectedValue}
-				onChange={(event: any): void => {
+				onChange={(event: string) => {
 					dispatch(selectFunction(event));
 				}}
 			>

@@ -1,7 +1,7 @@
 import { ISort } from 'types/filterData.interface';
 
 export default function quickSort(products: ISort[]): ISort[] {
-	const amountArray = products.map((item: any) => item.amount);
+	const amountArray = products.map(({ amount }: { amount: string }) => amount);
 	if (amountArray.length <= 1) {
 		return products;
 	}

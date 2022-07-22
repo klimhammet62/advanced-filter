@@ -1,11 +1,10 @@
 import { PayloadAction, createSlice, current } from '@reduxjs/toolkit';
-import { TInitialState } from 'types/filterData.interface';
-
-import quickSort from '@/utils/quicksort/quickSort';
+import { IFilteredData, TInitialState } from 'types/filterData.interface';
 
 import data from '../../../data/mock.json';
 import type { AppState } from '../../store';
-import store from '../../store';
+
+// import quickSort from '@/utils/quicksort/quickSort' in future
 
 const initialState: TInitialState = {
 	products: data,
@@ -21,10 +20,10 @@ export const filterSlice = createSlice({
 	name: 'filter',
 	initialState,
 	reducers: {
-		filterName: (state: any, action: PayloadAction<string>) => {
+		filterName: (state: TInitialState, action: PayloadAction<string>) => {
 			let copyState = current(state);
 			let copyStateProducts = copyState.products.map(
-				(i: any) => (i = { ...i })
+				(i: IFilteredData) => (i = { ...i })
 			);
 
 			state.filteredData = copyStateProducts.filter(
@@ -51,41 +50,45 @@ export const filterSlice = createSlice({
 			copyState = { ...copyState, filteredData: state.filteredData };
 			state.filteredData = copyState.filteredData;
 		},
-		sortAmount: (state: any, action: PayloadAction<string>) => {
+		sortAmount: (state: TInitialState, action: PayloadAction<string>) => {
 			state.amount = action.payload;
 
 			if (action.payload === 'asc') {
 				let copyState = current(state);
 				let copyStateProducts = copyState.filteredData.map(
-					(i: any) => (i = { ...i })
+					(i: IFilteredData) => (i = { ...i })
 				);
 
-				state.filteredData = copyStateProducts.sort((a: any, b: any) => {
-					return parseInt(a.amount.slice(1)) - parseInt(b.amount.slice(1));
-				});
+				state.filteredData = copyStateProducts.sort(
+					({ amount }: { amount: string }) => {
+						return parseInt(amount.slice(1)) - parseInt(amount.slice(1));
+					}
+				);
 
 				copyState = { ...copyState, filteredData: state.filteredData };
 				state.filteredData = copyState.filteredData;
 			} else if (action.payload === 'desc') {
 				let copyState = current(state);
 				let copyStateProducts = copyState.filteredData.map(
-					(i: any) => (i = { ...i })
+					(i: IFilteredData) => (i = { ...i })
 				);
 
-				state.filteredData = copyStateProducts.sort((a: any, b: any) => {
-					return parseInt(b.amount.slice(1)) - parseInt(a.amount.slice(1));
-				});
+				state.filteredData = copyStateProducts.sort(
+					({ amount }: { amount: string }) => {
+						return parseInt(amount.slice(1)) - parseInt(amount.slice(1));
+					}
+				);
 
 				copyState = { ...copyState, filteredData: state.filteredData };
 				state.filteredData = copyState.filteredData;
 			}
 		},
-		changeCategory: (state: any, action: PayloadAction<string>) => {
+		changeCategory: (state: TInitialState, action: PayloadAction<string>) => {
 			state.category = action.payload;
 
 			let copyState = current(state);
 			let copyStateProducts = copyState.filteredData.map(
-				(i: any) => (i = { ...i })
+				(i: IFilteredData) => (i = { ...i })
 			);
 
 			state.filteredData = copyStateProducts.filter(
@@ -95,16 +98,16 @@ export const filterSlice = createSlice({
 			copyState = { ...copyState, filteredData: state.filteredData };
 			state.filteredData = copyState.filteredData;
 		},
-		filterLocation: (state: any, action: PayloadAction<string>) => {
+		filterLocation: (state: TInitialState, action: PayloadAction<string>) => {
 			state.location = action.payload;
 
 			let copyState = current(state);
 			let copyStateProducts = copyState.filteredData.map(
-				(i: any) => (i = { ...i })
+				(i: IFilteredData) => (i = { ...i })
 			);
 
 			state.filteredData = copyStateProducts.filter(
-				({ location }: { location: string }) => location === action.payload
+				({ location }: { location?: string }) => location === action.payload
 			);
 
 			copyState = { ...copyState, filteredData: state.filteredData };
