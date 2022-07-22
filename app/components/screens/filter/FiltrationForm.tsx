@@ -1,5 +1,4 @@
 import { Selectors } from '@/components/Selectors';
-import { Button } from '@/components/ui/button';
 import { SearchInput } from '@/components/ui/searchInput';
 
 export const FiltrationForm = () => {
@@ -7,7 +6,6 @@ export const FiltrationForm = () => {
 		<div className="flex flex-row items-center">
 			<div className="flex flex-row items-center m-12">
 				<SearchInput />
-				<Button />
 			</div>
 			<Selectors />
 		</div>

@@ -9,12 +9,13 @@ import store from '../../store';
 
 const initialState: TInitialState = {
 	products: data,
+	filteredData: data,
 	amount: '',
 	category: '',
 	value: '',
 	status: 'idle',
-	filteredData: data,
 	location: '',
+	page: '',
 };
 
 export const filterSlice = createSlice({
@@ -26,6 +27,7 @@ export const filterSlice = createSlice({
 			let copyStateProducts = copyState.products.map(
 				(i: any) => (i = { ...i })
 			);
+
 			state.filteredData = copyStateProducts.filter(
 				({
 					transaction_name,
@@ -46,14 +48,16 @@ export const filterSlice = createSlice({
 					}
 				}
 			);
+
 			copyState = { ...copyState, filteredData: state.filteredData };
 			state.filteredData = copyState.filteredData;
 		},
 		sortAmount: (state: any, action: PayloadAction<string>) => {
 			state.amount = action.payload;
+
 			if (action.payload === 'asc') {
 				let copyState = current(state);
-				let copyStateProducts = state.filteredData.map(
+				let copyStateProducts = copyState.filteredData.map(
 					(i: any) => (i = { ...i })
 				);
 
@@ -65,45 +69,46 @@ export const filterSlice = createSlice({
 				state.filteredData = copyState.filteredData;
 			} else if (action.payload === 'desc') {
 				let copyState = current(state);
-				let copyStateProducts = state.filteredData.map(
+				let copyStateProducts = copyState.filteredData.map(
 					(i: any) => (i = { ...i })
 				);
+
 				state.filteredData = copyStateProducts.sort((a: any, b: any) => {
 					return parseInt(b.amount.slice(1)) - parseInt(a.amount.slice(1));
 				});
 
 				copyState = { ...copyState, filteredData: state.filteredData };
-
 				state.filteredData = copyState.filteredData;
 			}
 		},
 		changeCategory: (state: any, action: PayloadAction<string>) => {
 			state.category = action.payload;
+
 			let copyState = current(state);
-			let copyStateProducts = state.filteredData.map(
+			let copyStateProducts = copyState.filteredData.map(
 				(i: any) => (i = { ...i })
 			);
+
 			state.filteredData = copyStateProducts.filter(
 				({ category }: { category: string }) => category === action.payload
 			);
 
 			copyState = { ...copyState, filteredData: state.filteredData };
-
 			state.filteredData = copyState.filteredData;
 		},
 		filterLocation: (state: any, action: PayloadAction<string>) => {
 			state.location = action.payload;
+
 			let copyState = current(state);
-			let copyStateProducts = state.filteredData.map(
+			let copyStateProducts = copyState.filteredData.map(
 				(i: any) => (i = { ...i })
 			);
 
-			state.filteredData = state.filteredData.filter(
-				({ category }: { category: string }) => category === action.payload
+			state.filteredData = copyStateProducts.filter(
+				({ location }: { location: string }) => location === action.payload
 			);
 
 			copyState = { ...copyState, filteredData: state.filteredData };
-
 			state.filteredData = copyState.filteredData;
 		},
 	},
