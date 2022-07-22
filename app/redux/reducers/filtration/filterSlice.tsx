@@ -15,7 +15,6 @@ const initialState: TInitialState = {
 	value: '',
 	status: 'idle',
 	location: '',
-	page: '',
 };
 
 export const filterSlice = createSlice({

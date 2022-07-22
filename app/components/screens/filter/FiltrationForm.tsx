@@ -1,5 +1,5 @@
 import { Selectors } from '@/components/Selectors';
-import { SearchInput } from '@/components/ui/searchInput';
+import { SearchInput } from '@/components/ui/SearchInput';
 
 export const FiltrationForm = () => {
 	return (
