@@ -5,19 +5,23 @@
     "name": "Belkin Artemiy",
     "url": "https://github.com/klimhammet62"
   },
+  "homepage": "https://klimhammet62.github.io/advanced-filter",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d app"
   },
   "dependencies": {
     "@headlessui/react": "^1.6.6",
     "@heroicons/react": "^1.0.6",
     "@reduxjs/toolkit": "^1.8.3",
     "@types/lodash": "^4.14.182",
+    "gh-pages": "^4.0.0",
     "lodash.debounce": "^4.0.8",
     "nanoid": "^4.0.0",
     "next": "12.2.2",

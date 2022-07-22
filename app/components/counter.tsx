@@ -7,7 +7,6 @@ import {
 	increment,
 	incrementAsync,
 	incrementByAmount,
-	incrementIfOdd,
 	selectCount,
 	swap,
 } from '../redux/reducers/counter/counterSlice';
@@ -78,12 +77,12 @@ function Counter() {
 				>
 					Add Async
 				</button>
-				<button
+				{/* <button
 					className="m-2 dark: bg-slate-500 p-2 rounded-md"
 					onClick={() => dispatch(incrementIfOdd(incrementValue))}
 				>
 					Add If Odd
-				</button>
+				</button> */}
 			</div>
 			<Redirect text="Redirect to Home" link="" />
 		</div>
