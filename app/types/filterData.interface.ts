@@ -8,6 +8,7 @@ export interface IFilteredData {
 }
 export type TInitialState = {
 	products: IFilteredData[];
+	interimData: IFilteredData[];
 	amount: string;
 	category: string;
 	value: string;

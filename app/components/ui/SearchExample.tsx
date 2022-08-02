@@ -1,14 +1,17 @@
 import { debounce } from 'lodash';
 import { ChangeEvent } from 'react';
-import { filterName } from 'redux/reducers/filtration/filterSlice';
+import { filterTitle } from 'redux/reducers/goods/goodsSlice';
+
+
 
 import { useAppDispatch } from '@/hooks/redux';
 
-export const SearchInput = () => {
+
+export const SearchExample = () => {
 	const dispatch = useAppDispatch();
 
 	const updateValue = (e: ChangeEvent<HTMLInputElement>) =>
-		dispatch(filterName(e?.target?.value));
+		dispatch(filterTitle(e?.target?.value));
 
 	const debouncedOnChange = debounce(updateValue, 200);
 
@@ -35,7 +38,7 @@ export const SearchInput = () => {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
     "
 					placeholder="Write something"
-					onChange={debouncedOnChange}
+					onInput={debouncedOnChange}
 				/>
 			</div>
 		</div>

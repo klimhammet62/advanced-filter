@@ -1,3 +1,4 @@
+Main filter:
 [X] - 
     1.1 multiselect (how to drill functions)
     1.2 default option no filter(choose)
@@ -6,10 +7,8 @@
 [X] - noitems && (into array )
 [X] - 19 elements all pages bug
 
-[!!!] - do searchinput for name and vendor 
-[] - All changevalue
-[] - quicksort vmesto sort
-[] - category reducer 
-[] - do amount filter 
-[] - fix filter Products
-[*] - вызывать доступ ко всем страницам при пагинации большого количества страниц(по типу порнхаб и дискорд)
+Example filter:
+[] - add selectors and search logics
+[] - add redux object filtration
+[] - link to another page with this product
+[*] - category tree filter like in vkusvill (redux+utils+products category add)

@@ -25,7 +25,7 @@ export const Home: NextPage<IHome> = () => {
 					<DarkModeToggleButton />
 				</header>
 				<Redirect text="Filtration Page" link="filter" />
-				<Redirect text="Counter" link="counter" />
+				<Redirect text="Goods" link="goods" />
 			</div>
 		</Meta>
 	);

@@ -1,5 +1,5 @@
-export async function fetchCount(amount = 1): Promise<{ data: number }> {
-	const response = await fetch('/api/counter', {
+export async function fetchGoods(amount = 1): Promise<{ data: number }> {
+	const response = await fetch('/api/goods', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',

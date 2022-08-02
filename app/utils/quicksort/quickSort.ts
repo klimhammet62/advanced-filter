@@ -12,7 +12,6 @@ export default function quickSort(products: ISort[]): ISort[] {
 	const rightProducts = [];
 
 	for (let i = 0; i < amountArray.length - 1; i++) {
-		console.log(amountArray[i].slice(1));
 		if (amountArray[i].replace('$', '') < pivot.amount.slice(1)) {
 			leftProducts.push(products[i]);
 		} else {

@@ -1,11 +1,11 @@
-import Counter from '@/components/Counter';
+import Goods from '@/components/Goods';
 
 import { Meta } from '@/utils/meta/Meta';
 
 export default function CounterPage() {
 	return (
-		<Meta title="Counter">
-			<Counter />
+		<Meta title="Goods">
+			<Goods />
 		</Meta>
 	);
 }

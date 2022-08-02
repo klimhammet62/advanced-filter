@@ -15,7 +15,7 @@ export const MultiSelect = ({
 	array: string[];
 	defaultValue: string;
 	selectFunction: ActionCreatorWithPayload<string, string>;
-	selectedValue?: string | null;
+	selectedValue?: string | null | string[];
 }) => {
 	const dispatch = useAppDispatch();
 
